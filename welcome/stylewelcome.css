@@ -1,0 +1,57 @@
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  color: #111;
+}
+
+
+.hero-section {
+  background-color: black;
+  color: white;
+  padding-top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 2em;
+}
+
+
+.hero-btn {
+  padding: 12px 30px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .hero-btn {
+    padding: 10px 25px;
+  }
+}

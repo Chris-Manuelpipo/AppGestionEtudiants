@@ -1,0 +1,63 @@
+<!-- Login / register -->
+
+
+
+                                               
+            <!-- ,---,                                   
+          ,--.' |               ,--,                
+          |  |  :      __  ,-.,--.'|                
+          :  :  :    ,' ,'/ /||  |,      .--.--.    
+   ,---.  :  |  |,--.'  | |' |`--'_     /  /       
+  /     \ |  :  '   ||  |   ,',' ,'|   |  :  /`./   
+ /    / ' |  |   /' :'  :  /  '  | |   |  :  ;_     
+.    ' /  '  :  | | ||  | '   |  | :    \  \    `.  
+'   ; :__ |  |  ' | :;  : |   '  : |__   `----.   \ 
+'   | '.'||  :  :_:,'|  , ;   |  | '.'| /  /`--'  / 
+|   :    :|  | ,'     ---'    ;  :    ;'--'.     /  
+ \   \  / `--''               |  ,   /   `--'---'   
+  `----'                       ---`-'                -->
+                                                 
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion/Création de compte</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <form action="../Acceuil/Acceuil.html" method="GET" id="login-form">
+            <h1 id="form-title">Se connecter</h1>
+            <input type="text" id="login-username" name="login-username" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="login-password" name ="login-password" placeholder="Mot de passe" required>
+            <button type="submit">Connexion</button>
+            <p class="form">Pas encore de compte ? <a href="#" id="show-register">Créer un compte</a></p>
+        </form>
+
+        <form id="register-form" style="display: none;">
+            
+            <h1 id="form-title">Créer un compte</h1>
+            <div class="radio-group">
+                <label class="radio-option" for="studstatus">
+                    <input id="studstatus" type="radio" name="user-type" value="etudiant" required>Étudiant
+                </label>
+
+                <label class="radio-option" for="teachstatus">
+                    <input id="teachstatus" type="radio" name="user-type" value="enseignant" required>Enseignant
+                </label>
+            </div>
+            <input type="text" id="register-username" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="register-password" placeholder="Mot de passe" required>
+            <button type="submit">Créer le compte</button>
+            <p class="form">Déjà inscrit ? <a href="#" id="show-login">Se connecter</a></p>
+        </form>
+        <br>
+        <p id="message"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

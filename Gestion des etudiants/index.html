@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Gestion des étudiants</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Système de Gestion des étudiants</h1>
+    </header>
+    <section>
+    <h2>Gestion des étudiants</h2>
+    <form action="required" id="formEtudiant">
+      <div class="champ">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="lastName" required>
+      </div>
+
+      <div class="champ">
+        <label for="pre">Prénom :</label>
+        <input type="text" id="pre" name="firstName" required>
+      </div>
+
+      <div class="champ">
+        <label for="num">Numéro d'étudiant :</label>
+        <input type="text" id="num" name="studentNumber" required>
+      </div>
+
+      <div class="champ">
+        <label for="mail">Email :</label>
+        <input type="email" id="mail" name="mailAdress" required>
+      </div>
+    </form>
+
+    
+    <button id="premier" class="premier" onclick="ajouterEtudiant();"> Ajouter étudiant</button>
+    </section>
+    <table border="3" id="tablestudent">
+        <caption> <h2>Tableau d'étudiants</h2>  </caption>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Numéro d'étudiant</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+
+        </tbody>
+    </table>
+    
+   
+    <section><h2>Saisie des Notes</h2>
+       <div class="champ">
+      <label for="étudiantsderoulant">Sélecteur d'Étudiant :</label>
+      <select name="étudiants" id="étudiantsderoulant"></select>
+    </div>
+
+    <div class="champ">
+      <label for="AC">Analyse et Conception :</label>
+      <input type="number" id="AC" name="Analyse et conception" min="0" max="20">
+    </div>
+
+    <div class="champ">
+      <label for="POO">Programmation Orientée Objet :</label>
+      <input type="number" id="POO" name="Programmation orientée objet" min="0" max="20">
+    </div>
+
+    <div class="champ">
+      <label for="BD">Base de Données :</label>
+      <input type="number" id="BD" name="Base de données" min="0" max="20">
+    </div>
+
+    <div class="champ">
+      <label for="GP">Gestion de Projet :</label>
+      <input type="number" id="GP" name="Gestion de projet" min="0" max="20">
+    </div>
+
+    <div class="champ">
+      <label for="TQL">Tests et Qualité Logicielle :</label>
+      <input type="number" id="TQL" name="Tests et qualité logicielle" min="0" max="20">
+    </div>
+ 
+    <button id="second" class="second" onclick="saisirNotes()">Enregistrer Notes</button>
+    </section>
+
+</body>
+</html>

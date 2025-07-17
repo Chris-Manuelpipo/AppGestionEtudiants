@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultation des notes</title>
+    <link rel="stylesheet" href="stylenotes.css" />
+</head>
+<body>
+    <form id="matriculeForm">
+        
+            <label for="studnumber"></label>
+            <input type="text" id="studnumber" name="studnumber" placeholder="Entrez votre numéro d'étudiant" required>
+
+            <button type="submit">Consulter</button>
+        
+    </form>
+        <table border="3" id="tablemarks">
+        <caption> <h2>NOTES</h2>  </caption>
+        <thead>
+            <tr>
+                <th>Analyse et conception</th>
+                <th>Base de données</th>
+                <th>Gestion de Projet</th>
+                <th>Programmation orientée objet</th>
+                <th>Tests et Qualité Logicielle</th>
+                <th>Moyenne</th>
+
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+
+    <p id="message"></p>
+    <script src="scriptnotes.js"></script>
+</body>
+</html>
