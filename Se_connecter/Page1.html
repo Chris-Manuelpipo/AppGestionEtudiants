@@ -32,7 +32,7 @@
         <form action="../Acceuil/Acceuil.html" method="GET" id="login-form">
             <h1 id="form-title">Se connecter</h1>
             <input type="text" id="login-username" name="login-username" placeholder="Nom d'utilisateur" required>
-            <input type="password" id="login-password" name ="login-password" placeholder="Mot de passe" required>
+            <input type="password" id="login-password" class="password" name ="login-password" placeholder="Mot de passe" required>
             <button type="submit">Connexion</button>
             <p class="form">Pas encore de compte ? <a href="#" id="show-register">Créer un compte</a></p>
         </form>
@@ -50,7 +50,20 @@
                 </label>
             </div>
             <input type="text" id="register-username" placeholder="Nom d'utilisateur" required>
-            <input type="password" id="register-password" placeholder="Mot de passe" required>
+            <input type="password" id="register-password" class="password" placeholder="Mot de passe" required>
+            <input type="checkbox" id="showPassword" onclick="togglePassword()"> 
+            <label for="showPassword">Afficher le mot de passe</label>
+            <div class="champ" id="matiere-container" style="display:none;">
+                <label for="matiere">Matière :</label>
+                <select id="matiere">
+                    <option value="AC">Analyse et Conception</option>
+                    <option value="POO">Programmation Orientée Objet</option>
+                    <option value="BD">Base de Données</option>
+                    <option value="GP">Gestion de Projet</option>
+                    <option value="TQL">Tests et Qualité Logicielle</option>
+                </select>
+            </div>
+
             <button type="submit">Créer le compte</button>
             <p class="form">Déjà inscrit ? <a href="#" id="show-login">Se connecter</a></p>
         </form>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV - Chris ETCHOME</title>
   <link rel="stylesheet" href="styleprofil.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 <body>
     <!-- Le CV va comporter:
@@ -23,6 +26,11 @@
     Centres d’intérêt
     
     -->
+  <div id="btnContainer">
+    <button id="btnModifier" class="btnCV" onclick="ouvrirEdition()">Modifier mon CV</button>
+    <button id="btnDownload" class="btnCV">Télécharger mon CV</button>
+  </div>
+
   <div class="cv-container">
     <header>
       <div class="haut">
@@ -32,24 +40,27 @@
           <p>Étudiant en Génie Informatique</p>
         </div>
       </div>
+      
+
     </header>
 
     <section class="infos">
       <h2>Informations</h2>
-      <p>Email : etchomechris2000@email.com</p>
-      <p>Téléphone : +237 6 54 80 49 07</p>
-      <p>Ville : Yaoundé, Cameroun</p>
-      <p>LinkedIn : Chris ETCHOME</p>
+      <p>Email : <span id="email">etchomechris2000@email.com</span></p>
+      <p>Téléphone : <span id="telephone">+237 6 54 80 49 07</span></p>
+      <p>Ville : <span id="ville">Yaoundé, Cameroun</span></p>
+      <p>LinkedIn : <span id="linkedin">Chris ETCHOME</span></p>
     </section>
 
     <section class="competences">
       <h2>Compétences</h2>
-      <ul>
+      <ul id="competences">
         <li>HTML, CSS, JavaScript</li>
         <li>Python</li>
         <li>C</li>
       </ul>
     </section>
+
 
     <section class="formations">
       <h2>Formation</h2>
@@ -77,6 +88,54 @@
         <li>Travail en équipe</li>
       </ul>
     </section>
+
+    
+
   </div>
+  <div id="modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h2>Modifier mes informations</h2>
+
+        <label>Photo :</label>
+        <input type="file" id="inputPhoto" accept="image/*">
+
+        <label>Nom :</label>
+        <input type="text" id="inputNom">
+
+        <label>Titre :</label>
+        <input type="text" id="inputTitre">
+
+        <label>Email :</label>
+        <input type="text" id="inputEmail">
+
+        <label>Téléphone :</label>
+        <input type="text" id="inputTelephone">
+
+        <label>Ville :</label>
+        <input type="text" id="inputVille">
+
+        <label>LinkedIn :</label>
+        <input type="text" id="inputLinkedin">
+
+        <label>Compétences (séparées par des virgules) :</label>
+        <input type="text" id="inputCompetences">
+
+        <label>Formation :</label>
+        <input type="text" id="inputFormation">
+
+        <label>Expérience professionnelle :</label>
+        <input type="text" id="inputExperience">
+
+        <label>Langues (séparées par des virgules) :</label>
+        <input type="text" id="inputLangues">
+
+        <label>Centres d’intérêt (séparés par des virgules) :</label>
+        <input type="text" id="inputInterets">
+
+        <button onclick="sauvegarder()">Sauvegarder</button>
+        <button onclick="fermerModal()">Annuler</button>
+      </div>
+  </div>
+<script src="script.js"></script>
 </body>
 </html>

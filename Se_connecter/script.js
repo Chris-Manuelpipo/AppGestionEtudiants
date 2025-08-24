@@ -5,6 +5,19 @@ const showRegister = document.getElementById("show-register");
 const formTitle = document.getElementById("form-title");
 const message = document.getElementById("message");
 
+//Togglepassword
+
+function togglePassword() {
+    const input = document.getElementById("register-password");
+    const checkbox = document.getElementById("showPassword");
+
+    if (checkbox.checked) {
+      input.type = "text"; // afficher
+    } else {
+      input.type = "password"; // masquer
+    }
+  }
+
 // Affichage des formulaires
 showRegister.onclick = function () {
     loginForm.style.display = "none";
@@ -17,17 +30,34 @@ showLogin.onclick = function () {
     registerForm.style.display = "none";
     message.textContent = "";
 };
+const userTypeRadios = document.querySelectorAll('input[name="user-type"]');
+const matiereContainer = document.getElementById("matiere-container");
+
+// Pour demander à l'enseignant de choisir sa matière
+
+userTypeRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+        if (radio.value === "enseignant" && radio.checked) {
+            matiereContainer.style.display = "flex";
+        } else {
+            matiereContainer.style.display = "none";
+        }
+    });
+});
+
 
 // Création de compte
 registerForm.onsubmit = function (e) {
     e.preventDefault();
     let username = document.getElementById("register-username").value;
     let password = document.getElementById("register-password").value;
-    let status = document.querySelector('input[name="user-type"]:checked').value;
+    let role = document.querySelector('input[name="user-type"]:checked').value;
+    let subject = role === "enseignant" ? document.getElementById("matiere").value : null;
     let user = {
         username:username,
         password:password,
-        status: status
+        role: role,
+        subject: subject,
     }
     let users = []
     console.log(users)
@@ -50,27 +80,62 @@ loginForm.onsubmit = function (e) {
     e.preventDefault();
     let username = document.getElementById("login-username").value;
     let password = document.getElementById("login-password").value;
-    let user = {
-        username:username,
-        password:password
-        //status:
-    }
+    // let user = {
+    //     username:username,
+    //     password:password
+    //     //status:
+    // }
     let storedusers = []
-    storedusers = JSON.parse(localStorage.getItem("users")) || []
-    storedusers.forEach(storedUser =>{
+    storedusers = JSON.parse(localStorage.getItem("users")) || [];
+    let storedUser = storedusers.find(u => u.username === username && u.password === password);
 
-    if (storedUser && storedUser.username === username && storedUser.password === password) {
-        message.textContent = "Connexion réussie !";
-        message.style.color = "green";
-        loginForm.reset()
-        redirectWithDelay("../Acceuil/Acceuil.html")
-    } else {
-        message.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
-        message.style.color = "red";
+    if (storedUser) {
+    if (storedUser.username === "admin") {
+        storedUser.role = "admin"; 
+        storedUser.subject = null;
     }
-    })
+    if (storedUser.username === "sadmin") {
+        storedUser.role = "sadmin"; 
+    }
 
+    message.textContent = "Connexion réussie !";
+    message.style.color = "green";
+    localStorage.setItem("currentUser", JSON.stringify(storedUser));
     loginForm.reset();
+
+    if (storedUser.role === "etudiant") {
+        redirectWithDelay("../Acceuil/Acceuil.html");
+    } else if (storedUser.role === "enseignant" || storedUser.role === "admin" || storedUser.role === "sadmin") {
+        redirectWithDelay("../Gestion_des_etudiants/index.html");
+    }
+
+} else {
+    message.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+    message.style.color = "red";
+}
+    // storedusers.forEach(storedUser =>{
+
+    // if (storedUser && storedUser.username === username && storedUser.password === password) {
+    //     if (storedUser.username === "admin") {
+    //         role = "admin"; 
+    //         storedUser.role = role; 
+    //     }
+    //     message.textContent = "Connexion réussie !";
+    //     message.style.color = "green";
+    //     localStorage.setItem("currentUser", JSON.stringify(storedUser));
+    //     loginForm.reset();
+    //     if (storedUser.role === "etudiant") {
+    //         redirectWithDelay("../Acceuil/Acceuil.html");
+    //     } else if (storedUser.role === "enseignant"|| role === "admin") {
+    //         redirectWithDelay("../Gestion_des_etudiants/index.html");
+    //     }
+    // }else {
+    //     message.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+    //     message.style.color = "red";
+    // } 
+    // })
+
+    // loginForm.reset();
 };
 
 function redirectWithDelay(destination_page) {

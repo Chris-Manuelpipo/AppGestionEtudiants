@@ -11,7 +11,7 @@
     <header>
         <h1>Système de Gestion des étudiants</h1>
     </header>
-    <section>
+    <section id="admin">
     <h2>Gestion des étudiants</h2>
     <form action="required" id="formEtudiant">
       <div class="champ">
@@ -33,11 +33,10 @@
         <label for="mail">Email :</label>
         <input type="email" id="mail" name="mailAdress" required>
       </div>
+      <button type="submit" id="premier" class="premier" > Ajouter étudiant</button>
     </form>
 
-    
-    <button id="premier" class="premier" onclick="ajouterEtudiant();"> Ajouter étudiant</button>
-    </section>
+    </section >
     <table border="3" id="tablestudent">
         <caption> <h2>Tableau d'étudiants</h2>  </caption>
         <thead>
@@ -55,7 +54,7 @@
     </table>
     
    
-    <section><h2>Saisie des Notes</h2>
+    <section id="notes"><h2>Saisie des Notes</h2>
        <div class="champ">
       <label for="étudiantsderoulant">Sélecteur d'Étudiant :</label>
       <select name="étudiants" id="étudiantsderoulant"></select>
@@ -88,6 +87,16 @@
  
     <button id="second" class="second" onclick="saisirNotes()">Enregistrer Notes</button>
     </section>
+
+    <!-- Modal pour afficher les notes -->
+    <div id="notesModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Notes de l'étudiant</h2>
+        <div id="modalBody"></div>
+    </div>
+    </div>
+
 
 </body>
 </html>

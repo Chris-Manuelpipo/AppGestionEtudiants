@@ -1,6 +1,51 @@
 //Appeler au chargement de la page
 window.addEventListener('load',chargerEtudiants)
 
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!currentUser || (currentUser.role !== "enseignant" && currentUser.role !== "admin" && currentUser.role !== "sadmin")) {
+    alert("Accès refusé !");
+    window.location.href = "../Se_connecter/Page1.html";
+}
+
+window.onload = function () {
+    if (!currentUser) {
+        alert("Accès refusé !");
+        window.location.href = "../Connexion/login.html";
+    }
+    if (currentUser.role === "admin") {
+        document.getElementById("admin").style.display = "flex";
+        document.getElementById("notes").style.display = "none";
+    }else if(currentUser.role === "sadmin"){
+        document.getElementById("admin").style.display = "flex";
+    } else {
+        document.getElementById("admin").style.display = "none";
+        document.getElementById("tablestudent").style.display = "none";
+    }
+
+    if (currentUser.role === "enseignant") {
+        // désactiver tous les champs
+        document.getElementById("AC").disabled = true;
+        document.getElementById("POO").disabled = true;
+        document.getElementById("BD").disabled = true;
+        document.getElementById("GP").disabled = true;
+        document.getElementById("TQL").disabled = true;
+
+        // activer uniquement le champ correspondant à sa matière
+        switch(currentUser.subject) {
+            case "AC": document.getElementById("AC").disabled = false; break;
+            case "POO": document.getElementById("POO").disabled = false; break;
+            case "BD": document.getElementById("BD").disabled = false; break;
+            case "GP": document.getElementById("GP").disabled = false; break;
+            case "TQL": document.getElementById("TQL").disabled = false; break;
+    }
+};
+}
+
+document.getElementById("formEtudiant").onsubmit = function(e) {
+    e.preventDefault(); 
+    ajouterEtudiant();
+}
 
 //Etape 3: CRUD 
 // var etudiants =[]
@@ -89,6 +134,7 @@ function afficherEtudiants(){//Cette fonction permet d'afficher les étudiants d
       <td class = "cell">
         <button onclick="supprimerEtudiant('${element.numeroEtudiant}')"> Supprimer</button>
         <button onclick="calculAffichmoyenne('${element.numeroEtudiant}')"> Moyenne</button>
+        <button onclick="voirNotes('${element.numeroEtudiant}')">Voir les notes</button>
       </td> `
     tbody.appendChild(row)
     
@@ -164,6 +210,7 @@ function deroulante(){
 // }
 
 function saisirNotes() {
+    
 
     // Récupérer le numéro d'étudiant sélectionné dans le select
     let numeroChoisi = document.getElementById("étudiantsderoulant").value;
@@ -279,3 +326,37 @@ function calculAffichmoyenne(numeroEtudiant){
 
     
 
+// modal
+
+function voirNotes(numeroEtudiant) {
+    let etudiants = JSON.parse(localStorage.getItem("etudiants2")) || [];
+    let etudiant = etudiants.find(e => e.numeroEtudiant === numeroEtudiant);
+
+    if (!etudiant || !etudiant.notes) {
+        alert("Aucune note enregistrée pour cet étudiant.");
+        return;
+    }
+
+    // Créer le texte HTML des notes
+    let notesHTML = `<p><strong>${etudiant.nom} ${etudiant.prenom}</strong></p><ul>`;
+    for (let matiere in etudiant.notes) {
+        notesHTML += `<li>${matiere} : ${etudiant.notes[matiere]}</li>`;
+    }
+    notesHTML += `</ul>`;
+
+    // Afficher dans le modal
+    document.getElementById("modalBody").innerHTML = notesHTML;
+    document.getElementById("notesModal").style.display = "block";
+}
+
+// Fermer le modal au clic sur la croix
+document.querySelector(".close").onclick = function() {
+    document.getElementById("notesModal").style.display = "none";
+};
+
+// Fermer le modal si clic à l'extérieur
+window.onclick = function(event) {
+    if (event.target == document.getElementById("notesModal")) {
+        document.getElementById("notesModal").style.display = "none";
+    }
+};
